@@ -14,46 +14,59 @@ public class FootstepManager : MonoBehaviour
     public AudioSource audioSource;
     public float stepInterval = 0.5f;
 
-    private float stepTimer;
+    private float stepTimer = 0f;
+    private Rigidbody rb;
+    private bool wasMoving = false;
 
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
         if (audioSource == null)
         {
             audioSource = gameObject.AddComponent<AudioSource>();
         }
+        audioSource.loop = false;
+        audioSource.playOnAwake = false;
     }
 
     void Update()
     {
-        if (IsGrounded() && IsMoving())
+        bool isGrounded = Physics.Raycast(transform.position, Vector3.down, 1.2f);
+        bool isMoving = rb.linearVelocity.magnitude > 0.1f;
+
+        if (isGrounded && isMoving)
         {
-            stepTimer += Time.deltaTime;
-            if (stepTimer > stepInterval)
+            // Si antes estaba quieto y ahora se mueve, reproducimos inmediatamente
+            if (!wasMoving)
             {
-                RaycastHit hit;
-                if (Physics.Raycast(transform.position, Vector3.down, out hit, 2f))
-                {
-                    PlayFootstep(hit.collider.tag);
-                }
+                TryPlayFootstep();
                 stepTimer = 0f;
             }
+            else
+            {
+                stepTimer += Time.deltaTime;
+                if (stepTimer >= stepInterval && !audioSource.isPlaying)
+                {
+                    TryPlayFootstep();
+                    stepTimer = 0f;
+                }
+            }
         }
-        else
+
+        if (!isMoving)
         {
-            stepTimer = 0f;
+            stepTimer = 0f; // Reiniciar si se detiene
         }
+
+        wasMoving = isMoving;
     }
 
-    bool IsGrounded()
+    void TryPlayFootstep()
     {
-        return Physics.Raycast(transform.position, Vector3.down, 1.2f); // Ajusta si tu personaje es m�s alto o bajo
-    }
-
-    bool IsMoving()
-    {
-        Rigidbody rb = GetComponent<Rigidbody>();
-        return rb != null && rb.linearVelocity.magnitude > 0.1f;
+        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 2f))
+        {
+            PlayFootstep(hit.collider.tag);
+        }
     }
 
     void PlayFootstep(string surfaceTag)
