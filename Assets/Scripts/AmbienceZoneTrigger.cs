@@ -16,13 +16,11 @@ public class AmbienceZoneTrigger : MonoBehaviour
     
     void Start()
     {
-        // Encontrar el sistema de ambiente
         ambienceSystem = FindObjectOfType<ZoneBasedAmbienceSystem>();
         
         if (ambienceSystem == null)
             Debug.LogError("No se ha encontrado ZoneBasedAmbienceSystem en la escena.");
         
-        // Verificar que el collider esté configurado como trigger
         Collider col = GetComponent<Collider>();
         if (col != null && !col.isTrigger)
         {
@@ -39,7 +37,6 @@ public class AmbienceZoneTrigger : MonoBehaviour
         }
     }
     
-    // Dibuja un gizmo en el editor para visualizar mejor la zona
     void OnDrawGizmos()
     {
         Gizmos.color = gizmoColor;
@@ -47,7 +44,6 @@ public class AmbienceZoneTrigger : MonoBehaviour
         Collider col = GetComponent<Collider>();
         if (col != null)
         {
-            // Dibuja una representación del collider
             Gizmos.matrix = transform.localToWorldMatrix;
             
             if (col is BoxCollider)
@@ -62,7 +58,6 @@ public class AmbienceZoneTrigger : MonoBehaviour
             }
             else if (col is CapsuleCollider)
             {
-                // Representación simplificada para cápsula
                 CapsuleCollider capsuleCol = col as CapsuleCollider;
                 Gizmos.DrawSphere(capsuleCol.center, capsuleCol.radius);
             }

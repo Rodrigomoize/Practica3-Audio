@@ -810,7 +810,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transitionTime: 2
-  player: {fileID: 0}
+  player: {fileID: 1364654108}
   showDebugMessages: 1
   ambienceZones:
   - zoneName: Windy
@@ -1688,7 +1688,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultCutoffFrequency: 22000
-  occludedCutoffFrequency: 1500
+  occludedCutoffFrequency: 1000
   listener: {fileID: 1364654108}
   occlusionLayers:
     serializedVersion: 2
@@ -2421,6 +2421,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tent
       objectReference: {fileID: 0}
+    - target: {fileID: 2310657667096277493, guid: 3d7d052c4f7972b419095430f1b1bcee, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350747449065530843, guid: 3d7d052c4f7972b419095430f1b1bcee, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6690078276799927365, guid: 3d7d052c4f7972b419095430f1b1bcee, type: 3}
       propertyPath: m_LocalPosition.x
       value: -16.557497
@@ -3023,6 +3031,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2112285004}
     m_Modifications:
+    - target: {fileID: 1963175089238147017, guid: 67faf9a66dd0bc647a4e86104645b9cb, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3013564795839887247, guid: 67faf9a66dd0bc647a4e86104645b9cb, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4803696493036726492, guid: 67faf9a66dd0bc647a4e86104645b9cb, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4803696493036726492, guid: 67faf9a66dd0bc647a4e86104645b9cb, type: 3}
       propertyPath: m_TagString
       value: Wood
@@ -3070,6 +3090,10 @@ PrefabInstance:
     - target: {fileID: 6458837697742786498, guid: 67faf9a66dd0bc647a4e86104645b9cb, type: 3}
       propertyPath: m_Name
       value: Barrel Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 6458837697742786498, guid: 67faf9a66dd0bc647a4e86104645b9cb, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5383,7 +5407,7 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 72e6c0c2aa90b194da0286c7b83c021e, type: 3}
   audioSource: {fileID: 1031802533}
   walkStepInterval: 1.2
-  runStepInterval: 0.5
+  runStepInterval: 0.7
   fadeOutDuration: 0.2
 --- !u!1001 &1376077688
 PrefabInstance:
@@ -5558,7 +5582,7 @@ GameObject:
   - component: {fileID: 1391783328}
   - component: {fileID: 1391783327}
   - component: {fileID: 1391783326}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Inside Tent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5729,7 +5753,7 @@ GameObject:
   - component: {fileID: 1477230915}
   - component: {fileID: 1477230917}
   - component: {fileID: 1477230916}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Inside Tent (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6626,6 +6650,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tent (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2310657667096277493, guid: 3d7d052c4f7972b419095430f1b1bcee, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350747449065530843, guid: 3d7d052c4f7972b419095430f1b1bcee, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6690078276799927365, guid: 3d7d052c4f7972b419095430f1b1bcee, type: 3}
       propertyPath: m_LocalPosition.x
       value: -15.37
@@ -6769,6 +6801,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2112285004}
     m_Modifications:
+    - target: {fileID: 4803696493036726492, guid: 67faf9a66dd0bc647a4e86104645b9cb, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4803696493036726492, guid: 67faf9a66dd0bc647a4e86104645b9cb, type: 3}
       propertyPath: m_TagString
       value: Wood
@@ -7684,7 +7720,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   underwaterAmbience: {fileID: 8300000, guid: f22d9bfe2270b05499872028014bc704, type: 3}
   audioMixer: {fileID: 24100000, guid: 4c94bb07a630a474b9e8a40fc86e1405, type: 2}
-  underwaterSnapshot: {fileID: 4024922123296538354, guid: 4c94bb07a630a474b9e8a40fc86e1405, type: 2}
+  underwaterSnapshot: {fileID: 2221303505464448898, guid: 4c94bb07a630a474b9e8a40fc86e1405, type: 2}
   defaultSnapshot: {fileID: 24500006, guid: 4c94bb07a630a474b9e8a40fc86e1405, type: 2}
   transitionTime: 1
   fadeSpeed: 1.5
