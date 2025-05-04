@@ -14,12 +14,10 @@ public class FootstepManager : MonoBehaviour
     public AudioSource audioSource;
     public float stepInterval = 0.5f;
 
-    private CharacterController controller;
     private float stepTimer;
 
     void Start()
     {
-        controller = GetComponent<CharacterController>();
         if (audioSource == null)
         {
             audioSource = gameObject.AddComponent<AudioSource>();
@@ -28,7 +26,7 @@ public class FootstepManager : MonoBehaviour
 
     void Update()
     {
-        if (controller.isGrounded && controller.velocity.magnitude > 0.1f)
+        if (IsGrounded() && IsMoving())
         {
             stepTimer += Time.deltaTime;
             if (stepTimer > stepInterval)
@@ -45,6 +43,17 @@ public class FootstepManager : MonoBehaviour
         {
             stepTimer = 0f;
         }
+    }
+
+    bool IsGrounded()
+    {
+        return Physics.Raycast(transform.position, Vector3.down, 1.2f); // Ajusta si tu personaje es m�s alto o bajo
+    }
+
+    bool IsMoving()
+    {
+        Rigidbody rb = GetComponent<Rigidbody>();
+        return rb != null && rb.linearVelocity.magnitude > 0.1f;
     }
 
     void PlayFootstep(string surfaceTag)
