@@ -130,6 +130,7 @@ AudioMixerController:
   m_Snapshots:
   - {fileID: 24500006}
   - {fileID: 2221303505464448898}
+  - {fileID: 4024922123296538354}
   m_StartSnapshot: {fileID: 24500006}
   m_SuspendThreshold: -80
   m_EnableSuspend: 1
@@ -146,7 +147,7 @@ AudioMixerController:
     - 5e4d11efdb5cb0e4fa4639f2453a3a9f
     name: View
   m_CurrentViewIndex: 0
-  m_TargetSnapshot: {fileID: 24500006}
+  m_TargetSnapshot: {fileID: 4024922123296538354}
 --- !u!243 &24300002
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
@@ -194,7 +195,7 @@ AudioMixerSnapshotController:
   m_SnapshotID: 4c05d6eb8ec668e4e8b73cd7b9a607d8
   m_FloatValues:
     bae85ad0f1eb3164a84ea0de6621cdbf: 5000
-    4e576b87cf7d45e479d0a08fb63d6652: -7.8940816
+    4e576b87cf7d45e479d0a08fb63d6652: -2.8722944
     3186332ec093b3d44b751464fe7db610: -3.5090396
   m_TransitionOverrides: {}
 --- !u!244 &759232947509885741
@@ -245,10 +246,13 @@ AudioMixerSnapshotController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Bajo del agua
+  m_Name: "Reverberaci\xF3n lago"
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: 66d48fe70aecb4042abd991553e42d24
-  m_FloatValues: {}
+  m_FloatValues:
+    d35171176a12b3e4ba1891ea36787b6b: -4.1973577
+    4e576b87cf7d45e479d0a08fb63d6652: -80
+    3186332ec093b3d44b751464fe7db610: 2.4583216
   m_TransitionOverrides: {}
 --- !u!243 &3795290595262228533
 AudioMixerGroupController:
@@ -285,6 +289,20 @@ AudioMixerEffectController:
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
+--- !u!245 &4024922123296538354
+AudioMixerSnapshotController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Underwater
+  m_AudioMixer: {fileID: 24100000}
+  m_SnapshotID: 6914308f134f9be4996e5cf560208d1b
+  m_FloatValues:
+    d35171176a12b3e4ba1891ea36787b6b: -4.1973577
+    4e576b87cf7d45e479d0a08fb63d6652: -80
+    3186332ec093b3d44b751464fe7db610: 2.4583216
+  m_TransitionOverrides: {}
 --- !u!244 &4458872630625311527
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
