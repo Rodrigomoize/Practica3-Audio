@@ -5279,7 +5279,9 @@ MonoBehaviour:
     clips:
     - {fileID: 8300000, guid: 431b2d1ed9a613e43adc50a44a79d25d, type: 3}
   audioSource: {fileID: 1031802533}
-  stepInterval: 1.2
+  walkStepInterval: 1.2
+  runStepInterval: 0.7
+  fadeOutDuration: 0.2
 --- !u!1001 &1376077688
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 
 public class FootstepManager : MonoBehaviour
 {
@@ -12,11 +13,16 @@ public class FootstepManager : MonoBehaviour
 
     public List<FootstepData> footstepSounds;
     public AudioSource audioSource;
-    public float stepInterval = 0.5f;
+    public float walkStepInterval = 0.5f;
+    public float runStepInterval = 0.3f;
+    public float fadeOutDuration = 0.2f; // Duración del fade out cuando se detiene
 
     private float stepTimer = 0f;
     private Rigidbody rb;
+    private bool wasGrounded = true;
     private bool wasMoving = false;
+    private string currentSurfaceTag = "";
+    private Coroutine fadeOutCoroutine;
 
     void Start()
     {
@@ -32,12 +38,34 @@ public class FootstepManager : MonoBehaviour
     void Update()
     {
         bool isGrounded = Physics.Raycast(transform.position, Vector3.down, 1.2f);
-        bool isMoving = rb.linearVelocity.magnitude > 0.1f;
+        float speed = rb.linearVelocity.magnitude;
+        bool isMoving = speed > 0.1f;
+        bool isRunning = isMoving && Input.GetKey(KeyCode.LeftShift);
+        float currentStepInterval = isRunning ? runStepInterval : walkStepInterval;
 
-        if (isGrounded && isMoving)
+        // Si salta o deja de moverse, hacer fade out
+        if (!isGrounded || !isMoving)
         {
-            // Si antes estaba quieto y ahora se mueve, reproducimos inmediatamente
-            if (!wasMoving)
+            if (audioSource.isPlaying && fadeOutCoroutine == null)
+            {
+                fadeOutCoroutine = StartCoroutine(FadeOutAudio());
+            }
+            stepTimer = 0f;
+        }
+        else // Si está en el suelo y moviéndose
+        {
+            // Cancelar cualquier fade out en progreso
+            if (fadeOutCoroutine != null)
+            {
+                StopCoroutine(fadeOutCoroutine);
+                fadeOutCoroutine = null;
+                audioSource.volume = 1f;
+            }
+
+            // Actualizar el currentSurfaceTag
+            UpdateCurrentSurface();
+
+            if (!wasMoving || !wasGrounded)
             {
                 TryPlayFootstep();
                 stepTimer = 0f;
@@ -45,7 +73,7 @@ public class FootstepManager : MonoBehaviour
             else
             {
                 stepTimer += Time.deltaTime;
-                if (stepTimer >= stepInterval && !audioSource.isPlaying)
+                if (stepTimer >= currentStepInterval)
                 {
                     TryPlayFootstep();
                     stepTimer = 0f;
@@ -53,19 +81,24 @@ public class FootstepManager : MonoBehaviour
             }
         }
 
-        if (!isMoving)
-        {
-            stepTimer = 0f; // Reiniciar si se detiene
-        }
-
+        // Guardar estado anterior
         wasMoving = isMoving;
+        wasGrounded = isGrounded;
+    }
+
+    void UpdateCurrentSurface()
+    {
+        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 2f))
+        {
+            currentSurfaceTag = hit.collider.tag;
+        }
     }
 
     void TryPlayFootstep()
     {
-        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 2f))
+        if (!string.IsNullOrEmpty(currentSurfaceTag))
         {
-            PlayFootstep(hit.collider.tag);
+            PlayFootstep(currentSurfaceTag);
         }
     }
 
@@ -75,7 +108,28 @@ public class FootstepManager : MonoBehaviour
         if (data != null && data.clips.Count > 0)
         {
             AudioClip clip = data.clips[Random.Range(0, data.clips.Count)];
-            audioSource.PlayOneShot(clip);
+            audioSource.Stop(); // Detener cualquier clip anterior
+            audioSource.clip = clip;
+            audioSource.volume = 1f;
+            audioSource.Play();
         }
+    }
+
+    IEnumerator FadeOutAudio()
+    {
+        float startVolume = audioSource.volume;
+        float startTime = Time.time;
+
+        while (Time.time < startTime + fadeOutDuration)
+        {
+            float elapsed = Time.time - startTime;
+            float normalizedTime = elapsed / fadeOutDuration;
+            audioSource.volume = Mathf.Lerp(startVolume, 0, normalizedTime);
+            yield return null;
+        }
+
+        audioSource.Stop();
+        audioSource.volume = 1f;
+        fadeOutCoroutine = null;
     }
 }
