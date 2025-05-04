@@ -5272,10 +5272,12 @@ MonoBehaviour:
   - surfaceTag: Grass
     clips:
     - {fileID: 8300000, guid: 35994548a716b0942b8b3b0f8e59732d, type: 3}
-  - surfaceTag: Wood
-    clips: []
-  - surfaceTag: Stone
-    clips: []
+  - surfaceTag: Dirt
+    clips:
+    - {fileID: 8300000, guid: c9d3a5317a5ec7f4f8d3e4d9c244ef05, type: 3}
+  - surfaceTag: Water
+    clips:
+    - {fileID: 8300000, guid: 431b2d1ed9a613e43adc50a44a79d25d, type: 3}
   audioSource: {fileID: 1031802533}
   stepInterval: 0.5
 --- !u!1001 &1376077688
